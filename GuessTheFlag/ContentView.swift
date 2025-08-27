@@ -8,15 +8,41 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var showingAlert = false
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        ZStack{
+        RadialGradient(
+            
+            colors : [.red, .blue],
+            center: .center,
+            startRadius: 20,
+            endRadius: 200
+        )
+            Text("Your content")
+                .foregroundStyle(.secondary)
+                .padding(50)
+                .background(.red.gradient)
         }
-        .padding()
-    }
+        .ignoresSafeArea()
+        
+        Button("Delete Section", systemImage: "pencil",role: .destructive) {
+    
+        }.buttonStyle(.borderedProminent)
+            .tint(.green)
+        
+        Image(systemName: "pencil")
+        Button("Show alert"){
+            showingAlert = true
+        }
+        .alert("Important Message", isPresented:$showingAlert){
+            Button("Delete", role: .destructive){}
+            Button("Cancel", role: .cancel){}
+        } message: {
+            Text("Swift is soooo Damn Hard")
+        }
+        }
+    
+        
 }
 
 #Preview {
